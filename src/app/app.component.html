@@ -1,20 +1,144 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div *ngIf="values.length !=0 ">
+  <p>------------------------------------------------------------------------------------------</p>
+  <vaadin-chart title="Tỷ lệ Digital"
+                type="line"
+                subtitle="Source: demo.vissoft.vn"
+                [categories]=dates additional-options='{
+              "xAxis": {
+        "crosshair": true
+      },
+      "yAxis": [{
+      "id": "aaa",
 
+        "min": 0,
+        "title": {
+          "text": "values-line"
+        },
+        "tooltip": {
+        "pointFormat": "value: <b>{point.y:.2f}</b>"
+      },
+      },
+        {
+        "id": "bbb",
+
+     "opposite": true,
+
+        "min": 0,
+        "title": {
+          "text": "test"
+        },
+    }],
+      "legend": {
+        "layout": "vertical",
+        "align": "right",
+        "verticalAlign": "middle"
+      },
+
+    }'>
+
+    <vaadin-chart-series title="Xu hướng"  y-axis=[0]
+                         [values]=values>
+    </vaadin-chart-series>
+
+
+
+  </vaadin-chart>
+  <p>-----------------------------------------------------------------</p>
+
+
+  <vaadin-chart title="Tỷ lệ Digital"
+                stacking="normal"
+                subtitle="Source: demo.vissoft.vn"
+                [categories]=dates
+                additional-options='{
+              "yAxis": {
+              "opposite": true,
+        "min": 0,
+        "max": 120,
+
+        "title": {
+          "text": "Transaction (%)"
+        }
+      },
+      "legend": {
+        "layout": "horizontal",
+        "align": "right",
+        "verticalAlign": "bottom"
+      }
+    }'>
+    <vaadin-chart-series title="Tổng số lượt giao dịch service qua digital channels" stack="aaa"
+                         type="column"
+                         additional-options='{
+                         "style": {
+                         "colorIndex": 2,
+                         }
+
+                         }'
+                         [values]=valueStackColumnSlot1>
+    </vaadin-chart-series>
+    <vaadin-chart-series title="Tổng số followers trên các Fanpage" stack="aaa"
+                         type="column"
+                         [values]=valueStackColumnSlot2>
+    </vaadin-chart-series>
+    <vaadin-chart-series title="Tổng số hồ sơ điện tử (ký với khách hàng)" stack="aaa"
+                         type="column"
+                         [values]=valueStackColumnSlot3>
+    </vaadin-chart-series>
+    <vaadin-chart-series title="Tổng số chức năng được đưa lên digital channels" stack="aaa"
+                         type="column"
+                         [values]=valueStackColumnSlot4>
+    </vaadin-chart-series>
+    <vaadin-chart-series title="Tổng số chức năng được tự động hóa bằng AI" stack="aaa"
+                         type="column"
+                         [values]=valueStackColumnSlot5>
+    </vaadin-chart-series>
+    <vaadin-chart-series title="Xu hướng" type="line" unit="values-line"
+                         [values]=values>
+    </vaadin-chart-series>
+
+  </vaadin-chart>
+
+  <p>-------------------------------------------------------------------------------------</p>
+
+  <dom-module id="solidgauge" theme-for="vaadin-chart">
+    <template>
+      <style include="vaadin-chart-default-theme">
+        :host([theme~="solidgauge"]) .highcharts-yaxis-grid .highcharts-grid-line {
+          display: none;
+        }
+      </style>
+    </template>
+  </dom-module>
+  <vaadin-chart title="Speed" type="solidgauge" theme="solidgauge" tooltip additional-options='{
+      "pane": {
+        "center": ["50%","85%"],
+        "startAngle": -90,
+        "endAngle": 90,
+        "background": {
+          "innerRadius": "60%",
+          "outerRadius": "100%",
+          "shape":"arc"
+        }
+      },
+      "yAxis": {
+        "min": 0,
+        "max": 200,
+        "minorTickInterval": null,
+        "tickAmount": 2,
+        "title": {
+          "y":-70
+        },
+        "labels": {
+          "y":16
+        }
+      }
+    }'>
+    <vaadin-chart-series title="Speed" [values]=[num,40] additional-options='{
+      "dataLabels": {
+        "format": "<div style=\"text-align:center\"><span style=\"font-size:25px;color:black\">{y}</span><br/><span style=\"font-size:12px;color:silver\">km/h</span></div>"
+      }
+    }'>
+    </vaadin-chart-series>
+
+  </vaadin-chart>
+</div>
