@@ -2,41 +2,25 @@
   <p>------------------------------------------------------------------------------------------</p>
   <vaadin-chart title="Tỷ lệ Digital"
                 type="line"
-                subtitle="Source: demo.vissoft.vn"
+                subtitle="Source: demo.vissoft.vn" tooltip
                 [categories]=dates additional-options='{
               "xAxis": {
         "crosshair": true
       },
-      "yAxis": [{
-      "id": "aaa",
 
-        "min": 0,
-        "title": {
-          "text": "values-line"
-        },
-        "tooltip": {
-        "pointFormat": "value: <b>{point.y:.2f}</b>"
-      },
-      },
-        {
-        "id": "bbb",
-
-     "opposite": true,
-
-        "min": 0,
-        "title": {
-          "text": "test"
-        },
-    }],
       "legend": {
         "layout": "vertical",
         "align": "right",
         "verticalAlign": "middle"
       },
+      "tooltip": {
+        "pointFormat": "value: <b>{point.y:.2f}</b>"
+        }
+
 
     }'>
 
-    <vaadin-chart-series title="Xu hướng"  y-axis=[0]
+    <vaadin-chart-series title="Xu hướng" type = "line" unit="value-line"
                          [values]=values>
     </vaadin-chart-series>
 
@@ -64,16 +48,13 @@
         "layout": "horizontal",
         "align": "right",
         "verticalAlign": "bottom"
-      }
+      },
+      "tooltip": {
+        "pointFormat": "percent: <b>{point.y:.2f} %</b>"
+        }
     }'>
     <vaadin-chart-series title="Tổng số lượt giao dịch service qua digital channels" stack="aaa"
                          type="column"
-                         additional-options='{
-                         "style": {
-                         "colorIndex": 2,
-                         }
-
-                         }'
                          [values]=valueStackColumnSlot1>
     </vaadin-chart-series>
     <vaadin-chart-series title="Tổng số followers trên các Fanpage" stack="aaa"
@@ -90,9 +71,15 @@
     </vaadin-chart-series>
     <vaadin-chart-series title="Tổng số chức năng được tự động hóa bằng AI" stack="aaa"
                          type="column"
+
                          [values]=valueStackColumnSlot5>
     </vaadin-chart-series>
     <vaadin-chart-series title="Xu hướng" type="line" unit="values-line"
+                         additional-options='{
+                         "tooltip": {
+        "pointFormat": "value: <b>{point.y:.2f}</b>"
+        }
+                         }'
                          [values]=values>
     </vaadin-chart-series>
 
